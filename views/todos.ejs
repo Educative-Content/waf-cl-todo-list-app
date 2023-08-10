@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Todo List</title>
+</head>
+<body>
+  <h1>Your Todo List</h1>
+  <form id="searchForm" method="get">
+    <input type="text" name="query" placeholder="Search for items">
+    <button type="submit">Search</button>
+  </form>
+  <ul>
+    <% todos.forEach(todo => { %>
+      <li class="todo-item"><%= todo.text %></li>
+    <% }); %>
+  </ul>
+  
+  <h2>Add a New Todo Item</h2>
+  <form action="/add-todo" method="post">
+    <label for="todoText">Todo Text:</label>
+    <input type="text" id="todoText" name="todoText" required>
+    <br>
+    <button type="submit">Add Todo</button>
+  </form>
+
+  <script>
+    const searchForm = document.getElementById('searchForm');
+    const todoItems = document.querySelectorAll('.todo-item');
+
+    searchForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const searchQuery = searchForm.querySelector('input[name="query"]').value.toLowerCase();
+      
+      todoItems.forEach(todoItem => {
+        const todoText = todoItem.textContent.toLowerCase();
+        if (todoText.includes(searchQuery)) {
+          todoItem.style.display = 'block';
+        } else {
+          todoItem.style.display = 'none';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
