@@ -14,7 +14,7 @@ const db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: 'abcd1234',
-  database: 'my_db'
+  database: 'your_db_name'
 });
 
 db.connect((err) => {
@@ -60,12 +60,15 @@ app.get('/login', (req, res) => {
 });
 
 app.post('/login', (req, res) => {
-  const { username, password } = req.body;
-  // Check user credentials in the database
-  db.query('SELECT * FROM users WHERE username = ?', [username], (err, results) => {
+  const username = req.body.username; // Unsafe: Directly using user input
+  const password = req.body.password; // Unsafe: Directly using user input
+
+  const query = `SELECT * FROM users WHERE username = '${username}' AND password = '${password}'`;
+
+  db.query(query, (err, results) => {
     if (err) throw err;
 
-    if (results.length === 0 || results[0].password !== password) {
+    if (results.length === 0) {
       req.flash('message', 'Invalid username or password');
       res.redirect('/login');
     } else {
@@ -75,6 +78,7 @@ app.post('/login', (req, res) => {
   });
 });
 
+
 // add Todo
 app.post('/add-todo', (req, res) => {
     const userId = req.session.userId;
@@ -82,13 +86,19 @@ app.post('/add-todo', (req, res) => {
       res.redirect('/login');
       return;
     }
-  
+  s
     const { todoText } = req.body;
     const newTodo = { user_id: userId, text: todoText };
     db.query('INSERT INTO todos SET ?', newTodo, (err, result) => {
       if (err) throw err;
       res.redirect('/todos');
     });
+  });
+  
+  app.post("/process-comment", (req, res) => {
+    const comment = req.body.comment; // Retrieve the comment from the request
+    // You can perform any necessary processing here (even if it's minimal)
+    res.send(comment); // Return the processed comment as the response
   });
 
 // Todo List Page
