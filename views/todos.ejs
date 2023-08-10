@@ -12,8 +12,6 @@
       <br>
       <button type="submit">Add Todo</button>
     </form>
-    <input type="text" id="userComment" placeholder="Non-productive activities">
-    <button onclick="displayComment()">Forget</button>
   </container>
   <h2>Your Todo List</h2>
   <ul>
@@ -21,18 +19,31 @@
       <li class="todo-item"><%= todo.text %></li>
     <% }); %>
   </ul>
-  
   <!-- Add a section to display comments -->
   <div id="comments"></div>
 
+  <!-- Input field for user comment -->
+  <input type="text" id="userComment" placeholder="Non-productive activities">
+  <button onclick="sendComment()">Forget</button>
+
   <script>
-    const todoItems = document.querySelectorAll('.todo-item');
-    
-    function displayComment() {
+    function sendComment() {
       const userInput = document.getElementById('userComment').value;
-      // Display comment in the "comments" section
-      document.getElementById('comments').innerHTML += `${userInput}`;
+
+      const xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+          if (xhr.status === 200) {
+            document.getElementById('comments').innerHTML = xhr.responseText;
+          }
+        }
+      };
+
+      xhr.open("POST", "/process-comment", true);
+      xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+      xhr.send("comment=" + encodeURIComponent(userInput));
     }
   </script>
+
 </body>
 </html>
