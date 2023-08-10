@@ -86,7 +86,6 @@ app.post('/add-todo', (req, res) => {
       res.redirect('/login');
       return;
     }
-  s
     const { todoText } = req.body;
     const newTodo = { user_id: userId, text: todoText };
     db.query('INSERT INTO todos SET ?', newTodo, (err, result) => {
