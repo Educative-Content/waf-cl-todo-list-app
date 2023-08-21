@@ -2,10 +2,68 @@
 <html>
 <head>
   <title>Home</title>
+  <style>
+    /* Style for the entire page */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Style for the navbar */
+    .navbar {
+      background-color: #333;
+      overflow: hidden;
+    }
+
+    /* Style for the navigation links */
+    .navbar a {
+      float: left;
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
+
+    /* Style for the active link (if needed) */
+    .navbar a.active {
+      background-color: #ddd;
+      color: black;
+    }
+
+    /* Style for the page content */
+    .container {
+      margin: 20px;
+      padding: 20px;
+      background-color: white;
+      box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Style for headings */
+    h1 {
+      color: #333;
+    }
+
+    /* Style for links */
+    a {
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    /* Style for links on hover */
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
+  <nav class="navbar">
+    <a class="navbar-brand" href="/">Home</a>
+  </nav>  
   <h1>Welcome to the Todo App</h1>
-  <p>This is the homepage.</p>
+  <p>Let's start by logging in. Create an account if you don't have one already.</p>
   <p><a href="/register">Register</a> or <a href="/login">Login</a></p>
 </body>
 </html>
