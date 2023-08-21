@@ -3,7 +3,38 @@
 <head>
   <title>Login</title>
 </head>
+<style>
+  body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+  .navbar {
+      background-color: #333;
+      overflow: hidden;
+    }
+
+    /* Style for the navigation links */
+    .navbar a {
+      float: left;
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
+
+    /* Style for the active link (if needed) */
+    .navbar a.active {
+      background-color: #ddd;
+      color: black;
+    }
+</style>
 <body>
+  <nav class="navbar">
+    <a class="navbar-brand" href="/">Home</a>
+  </nav> 
   <h1>Login</h1>
   <p><%= message %></p>
   <form action="/login" method="post">
