@@ -60,24 +60,33 @@ app.get('/login', (req, res) => {
 });
 
 app.post('/login', (req, res) => {
-  const username = req.body.username; // Unsafe: Directly using user input
-  const password = req.body.password; // Unsafe: Directly using user input
+  const username = req.body.username;
+  const password = req.body.password;
 
   const query = `SELECT * FROM users WHERE username = '${username}' AND password = '${password}'`;
 
-  db.query(query, (err, results) => {
-    if (err) throw err;
+  try {
+    db.query(query, (err, results) => {
+      if (err) {
+        console.error('Error:', err);
+        req.flash('message', 'An error occurred while processing your request.');
+        return res.redirect('/login');
+      }
 
-    if (results.length === 0) {
-      req.flash('message', 'Invalid username or password');
-      res.redirect('/login');
-    } else {
-      req.session.userId = results[0].id;
-      res.redirect('/todos');
-    }
-  });
+      if (results.length === 0) {
+        req.flash('message', 'Invalid username or password');
+        res.redirect('/login');
+      } else {
+        req.session.userId = results[0].id;
+        res.redirect('/todos');
+      }
+    });
+  } catch (error) {
+    console.error('Error:', error);
+    req.flash('message', 'An error occurred while processing your request.');
+    res.redirect('/login');
+  }
 });
-
 
 // add Todo
 app.post('/add-todo', (req, res) => {
