@@ -104,9 +104,8 @@ app.post('/add-todo', (req, res) => {
   });
   
   app.post("/process-comment", (req, res) => {
-    const comment = req.body.comment; // Retrieve the comment from the request
-    // You can perform any necessary processing here (even if it's minimal)
-    res.send(comment); // Return the processed comment as the response
+    const comment = req.body.comment;
+    res.send(comment); 
   });
 
 // Todo List Page
@@ -124,8 +123,6 @@ app.get('/todos', (req, res) => {
     res.render('todos', { todos });
   });
 });
-
-// ... Other routes ...
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
