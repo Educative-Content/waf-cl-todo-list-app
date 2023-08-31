@@ -10,6 +10,11 @@
       margin: 0;
       padding: 0;
     }
+
+    div{
+      padding-left: 16px;
+    }
+
   .navbar {
       background-color: #333;
       overflow: hidden;
@@ -35,16 +40,18 @@
   <nav class="navbar">
     <a class="navbar-brand" href="/">Home</a>
   </nav>
-  <h1>Register</h1>
-  <p><%= message %></p>
-  <form action="/register" method="post">
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="username" required>
-    <br>
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required>
-    <br>
-    <button type="submit">Register</button>
-  </form>
+  <div>
+    <h1>Register</h1>
+    <p><%= message %></p>
+    <form action="/register" method="post">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required>
+      <br>
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required>
+      <br>
+      <button type="submit">Register</button>
+    </form>
+  </div>
 </body>
 </html>
