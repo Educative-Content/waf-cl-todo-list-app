@@ -10,6 +10,11 @@
       margin: 0;
       padding: 0;
     }
+
+  div {
+    padding-left: 16px;
+  }
+
   .navbar {
       background-color: #333;
       overflow: hidden;
@@ -35,28 +40,33 @@
   <nav class="navbar">
     <a class="navbar-brand" href="/">Home</a>
   </nav>
-  <h2>Add a New Todo Item</h2>
-  <container>
-    <form action="/add-todo" method="post">
-      <label for="todoText">Todo Text:</label>
-      <input type="text" id="todoText" name="todoText" required>
-      <br>
-      <button type="submit">Add Todo</button>
-    </form>
-  </container>
-  <h2>Your Todo List</h2>
-  <ul>
-    <% todos.forEach(todo => { %>
-      <li class="todo-item"><%= todo.text %></li>
-    <% }); %>
-  </ul>
-  <!-- Add a section to display comments -->
-  <div id="comments"></div>
+  <div>
+    <h2>Add a New Todo Item</h2>
+    <container>
+      <form action="/add-todo" method="post">
+        <label for="todoText">Todo Text:</label>
+        <input type="text" id="todoText" name="todoText" required>
+        <br>
+        <button type="submit">Add Todo</button>
+      </form>
+    </container>
+    <h2>Your Todo List</h2>
+    <ul>
+      <% todos.forEach(todo => { %>
+        <li class="todo-item"><%= todo.text %></li>
+      <% }); %>
+    </ul>
+  </div>
 
   <!-- Input field for user comment -->
-  <h2>Motivate Yourself</h2>
-  <input type="text" id="userComment" placeholder="Motivational Qoute">
-  <button onclick="sendComment()">Print</button>
+  <div>
+    <h2>Motivate Yourself</h2>
+    <input type="text" id="userComment" placeholder="Motivational Qoute">
+    <button onclick="sendComment()">Print</button>
+  </div>
+
+  <!-- Add a section to display comments -->
+  <div id="comments"></div>
 
   <script>
     function sendComment() {
